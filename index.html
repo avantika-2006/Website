@@ -1,370 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Astro Tourism - Explore the Cosmos</title>
-<style>
-  /* Import a modern space-themed font from Google Fonts */
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Astro Tourism - Explore the Cosmos</title>
+  <style>
+    /* Import a modern space-themed font from Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap');
 
-  /* Reset and base */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Roboto', sans-serif;
-    background: radial-gradient(ellipse at center, #000010 0%, #000000 100%);
-    color: #ddd;
-    overflow-x: hidden;
-    line-height: 1.6;
-    transition: background-color 0.5s, color 0.5s;
-  }
-  a {
-    color: #7df9ff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  a:hover, a:focus {
-    color: #76eec6;
-  }
+    /* Reset and base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* Starfield background animation */
-  #starfield {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    pointer-events: none;
-    z-index: -1;
-  }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: radial-gradient(ellipse at center, #000010 0%, #000000 100%);
+      color: #ddd;
+      overflow-x: hidden;
+      line-height: 1.6;
+      transition: background-color 0.5s, color 0.5s;
+    }
 
-  /* Container and layout */
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 2rem 1rem 4rem;
-  }
+    a {
+      color: #7df9ff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
-  header {
-    text-align: center;
-    padding: 4rem 1rem 3rem;
-    letter-spacing: 0.05em;
-    position: relative;
-  }
-  header h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 3.5rem;
-    color: #7df9ff;
-    margin-bottom: 0.3rem;
-    text-shadow: 0 0 12px #36faff, 0 0 22px #36faff;
-    animation: glowPulse 3s ease-in-out infinite alternate;
-    display: inline-block;
-    position: relative;
-  }
-  header h1::after {
-    content: '✨';
-    position: absolute;
-    top: -15px;
-    right: -25px;
-    animation: starTwinkle 4s infinite;
-    font-size: 1.8rem;
-    color: #7df9ff;
-    filter: drop-shadow(0 0 4px #7df9ff);
-  }
-  header p {
-    font-size: 1.4rem;
-    color: #aaccee;
-    font-weight: 300;
-    margin-bottom: 0.3rem;
-    animation: fadeInUp 1.8s ease forwards;
-    opacity: 0;
-  }
-  header p.visible {
-    opacity: 1;
-  }
+    a:hover,
+    a:focus {
+      color: #76eec6;
+    }
 
-  @keyframes glowPulse {
-    0% { text-shadow: 0 0 6px #36faff, 0 0 12px #36faff; }
-    100% { text-shadow: 0 0 20px #7df9ff, 0 0 30px #7df9ff; }
-  }
-  @keyframes starTwinkle {
-    0%, 100% { opacity: 1; transform: scale(1);}
-    50% { opacity: 0.3; transform: scale(1.3);}
-  }
-  @keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(20px);}
-    100% { opacity: 1; transform: translateY(0);}
-  }
+    /* Starfield background animation */
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-  nav {
-    background: #111622ee;
-    backdrop-filter: blur(8px);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 0 10px #0769af88;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-  }
-  nav li {
-    font-weight: 600;
-    font-family: 'Orbitron', sans-serif;
-  }
-  nav li:hover, nav li a:hover {
-    color: #76eec6;
-  }
+    /* Container and layout */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
 
-  /* Sections */
-  section {
-    margin-bottom: 4rem;
-  }
-  section h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 2rem;
-    color: #7df9ff;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.05em;
-    text-shadow: 0 0 5px #36faff;
-  }
-  section p {
-    max-width: 700px;
-    margin: 0 auto 1.5rem;
-    font-weight: 300;
-    color: #ccc;
-    font-size: 1.1rem;
-  }
+    header {
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      letter-spacing: 0.05em;
+      position: relative;
+    }
 
-  /* Image gallery */
-  .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-  .gallery img {
-    width: 280px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 0 12px #36faff88;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .gallery img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #76eec677;
-  }
-
-  /* Modal for expanded gallery images */
-  #modal {
-    position: fixed;
-    display: none;
-    z-index: 20;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    justify-content: center;
-    align-items: center;
-  }
-  #modal img {
-    max-width: 90vw;
-    max-height: 85vh;
-    border-radius: 14px;
-    box-shadow: 0 0 50px #0ff;
-  }
-  #modal:target {
-    display: flex;
-  }
-
-  /* Button style */
-  button {
-    background: #007f9f;
-    color: #fff;
-    border: none;
-    padding: 0.7rem 1.8rem;
-    border-radius: 25px;
-    font-weight: 600;
-    font-family: 'Orbitron', sans-serif;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 0 6px #0ff;
-  }
-  button:hover, button:focus {
-    background-color: #00afc7;
-    box-shadow: 0 0 12px #0ff;
-    outline: none;
-  }
-
-  /* Contact form */
-  form {
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  input[type="email"] {
-    padding: 0.7rem 1rem;
-    border-radius: 14px;
-    border: 1px solid #007f9f;
-    outline: none;
-    font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
-    transition: border-color 0.3s ease;
-  }
-  input[type="email"]:focus {
-    border-color: #00afc7;
-  }
-  .success-message {
-    text-align: center;
-    color: #76eec6;
-    font-weight: 700;
-  }
-
-  /* Responsive */
-  @media (max-width: 640px) {
     header h1 {
-      font-size: 2.4rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 3.5rem;
+      color: #7df9ff;
+      margin-bottom: 0.3rem;
+      text-shadow: 0 0 12px #36faff, 0 0 22px #36faff;
+      animation: glowPulse 3s ease-in-out infinite alternate;
+      display: inline-block;
+      position: relative;
     }
+
+    header h1::after {
+      content: '✨';
+      position: absolute;
+      top: -15px;
+      right: -25px;
+      animation: starTwinkle 4s infinite;
+      font-size: 1.8rem;
+      color: #7df9ff;
+      filter: drop-shadow(0 0 4px #7df9ff);
+    }
+
+    header p {
+      font-size: 1.4rem;
+      color: #aaccee;
+      font-weight: 300;
+      margin-bottom: 0.3rem;
+      animation: fadeInUp 1.8s ease forwards;
+      opacity: 0;
+    }
+
+    header p.visible {
+      opacity: 1;
+    }
+
+    @keyframes glowPulse {
+      0% {
+        text-shadow: 0 0 6px #36faff, 0 0 12px #36faff;
+      }
+
+      100% {
+        text-shadow: 0 0 20px #7df9ff, 0 0 30px #7df9ff;
+      }
+    }
+
+    @keyframes starTwinkle {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.3;
+        transform: scale(1.3);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    nav {
+      background: #111622ee;
+      backdrop-filter: blur(8px);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 0 10px #0769af88;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    nav li {
+      font-weight: 600;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    nav li:hover,
+    nav li a:hover {
+      color: #76eec6;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 4rem;
+    }
+
+    section h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: #7df9ff;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 5px #36faff;
+    }
+
+    section p {
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      font-weight: 300;
+      color: #ccc;
+      font-size: 1.1rem;
+    }
+
+    /* Image gallery */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
     .gallery img {
-      width: 90vw;
-      height: auto;
+      width: 280px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #36faff88;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-  }
 
-  /* Back to top button */
-  #backToTopBtn {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    display: none;
-    background: #007f9f;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    border: none;
-    color: #fff;
-    font-size: 26px;
-    font-weight: 700;
-    box-shadow: 0 0 12px #0ff;
-    cursor: pointer;
-    z-index: 30;
-    transition: background-color 0.3s ease;
-  }
-  #backToTopBtn:hover {
-    background-color: #00afc7;
-  }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #76eec677;
+    }
 
-  /* Dark mode styles */
-  body.dark-mode {
-    background: #f9f9fa;
-    color: #222;
-  }
-  body.dark-mode a {
-    color: #005577;
-  }
-  body.dark-mode a:hover, body.dark-mode a:focus {
-    color: #0099cc;
-  }
-  body.dark-mode nav {
-    background: #e0e8f5ee;
-    box-shadow: 0 0 10px #99bbf288;
-  }
-  body.dark-mode section h2 {
-    color: #004466;
-    text-shadow: none;
-  }
-  body.dark-mode section p {
-    color: #444;
-  }
-  body.dark-mode header h1 {
-    color: #005577;
-    text-shadow: none;
-    animation: none;
-  }
-  body.dark-mode header h1::after {
-    display: none;
-  }
-  body.dark-mode header p {
-    color: #336699;
-    opacity: 1 !important;
-    animation: none;
-  }
-  body.dark-mode .gallery img {
-    box-shadow: 0 0 15px #3399cc88;
-  }
-  body.dark-mode button, body.dark-mode #backToTopBtn {
-    background: #004477;
-    box-shadow: 0 0 10px #006699;
-  }
-  body.dark-mode button:hover, body.dark-mode #backToTopBtn:hover {
-    background: #0066aa;
-  }
-</style>
+    /* Modal for expanded gallery images */
+    #modal {
+      position: fixed;
+      display: none;
+      z-index: 20;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modal img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 14px;
+      box-shadow: 0 0 50px #0ff;
+    }
+
+    #modal:target {
+      display: flex;
+    }
+
+    /* Button style */
+    button {
+      background: #007f9f;
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 25px;
+      font-weight: 600;
+      font-family: 'Orbitron', sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 0 6px #0ff;
+    }
+
+    button:hover,
+    button:focus {
+      background-color: #00afc7;
+      box-shadow: 0 0 12px #0ff;
+      outline: none;
+    }
+
+    /* Contact form */
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input[type="email"] {
+      padding: 0.7rem 1rem;
+      border-radius: 14px;
+      border: 1px solid #007f9f;
+      outline: none;
+      font-size: 1rem;
+      font-family: 'Roboto', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="email"]:focus {
+      border-color: #00afc7;
+    }
+
+    .success-message {
+      text-align: center;
+      color: #76eec6;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 2.4rem;
+      }
+
+      .gallery img {
+        width: 90vw;
+        height: auto;
+      }
+    }
+
+    /* Back to top button */
+    #backToTopBtn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      display: none;
+      background: #007f9f;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 700;
+      box-shadow: 0 0 12px #0ff;
+      cursor: pointer;
+      z-index: 30;
+      transition: background-color 0.3s ease;
+    }
+
+    #backToTopBtn:hover {
+      background-color: #00afc7;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background: #f9f9fa;
+      color: #222;
+    }
+
+    body.dark-mode a {
+      color: #005577;
+    }
+
+    body.dark-mode a:hover,
+    body.dark-mode a:focus {
+      color: #0099cc;
+    }
+
+    body.dark-mode nav {
+      background: #e0e8f5ee;
+      box-shadow: 0 0 10px #99bbf288;
+    }
+
+    body.dark-mode section h2 {
+      color: #004466;
+      text-shadow: none;
+    }
+
+    body.dark-mode section p {
+      color: #444;
+    }
+
+    body.dark-mode header h1 {
+      color: #005577;
+      text-shadow: none;
+      animation: none;
+    }
+
+    body.dark-mode header h1::after {
+      display: none;
+    }
+
+    body.dark-mode header p {
+      color: #336699;
+      opacity: 1 !important;
+      animation: none;
+    }
+
+    body.dark-mode .gallery img {
+      box-shadow: 0 0 15px #3399cc88;
+    }
+
+    body.dark-mode button,
+    body.dark-mode #backToTopBtn {
+      background: #004477;
+      box-shadow: 0 0 10px #006699;
+    }
+
+    body.dark-mode button:hover,
+    body.dark-mode #backToTopBtn:hover {
+      background: #0066aa;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Starfield canvas -->
-<canvas id="starfield"></canvas>
+  <!-- Starfield canvas -->
+  <canvas id="starfield"></canvas>
 
-<nav>
-  <ul>
-    <li><a href="#about" tabindex="1">About</a></li>
-    <li><a href="#destinations" tabindex="2">Destinations</a></li>
-    <li><a href="#gallery" tabindex="3">Gallery</a></li>
-    <li><a href="#contact" tabindex="4">Contact</a></li>
-    <li><button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle Dark Mode">🌙</button></li>
-  </ul>
-</nav>
-
-<header>
-  <h1>Astro Tourism</h1>
-  <p id="subtitle">Explore the Cosmos. Travel Beyond Earth.</p>
-  <p id="currentDateTime" aria-live="polite" style="font-style: italic; font-weight: 400; color: #9aefff; margin-top: 0.2rem;"></p>
-</header>
-
-<main class="container">
-
-  <section id="about">
-    <h2>What is Astro Tourism?</h2>
-    <p>Astro Tourism is the new frontier of travel, where adventurers journey beyond the confines of our planet to witness the wonders of space and celestial phenomena in person. Imagine walking on the moon, orbiting Earth, or seeing the breathtaking Milky Way with your own eyes.</p>
-  </section>
-
-  <section id="destinations">
-    <h2>Popular Astro Tourism Destinations</h2>
-    <p>From space hotels in low Earth orbit to guided stargazing trips in remote Earth locations, discover the best destinations to satisfy your cosmic wanderlust.</p>
-    <ul style="max-width: 700px; margin: 0 auto; list-style: none; padding: 0; font-weight: 300; color: #ccc; font-size: 1.1rem;">
-      <li>🌕 The Moon - Experience lunar landscapes and Earthrise views</li>
-      <li>🪐 Mars Explorations - Explore the red planet's mysterious terrain</li>
-      <li>🚀 Space Hotels - Stay in orbiting luxury with panoramic starscapes</li>
-      <li>🌌 Dark Sky Reserves - Earth-based getaways with perfect celestial views</li>
+  <nav>
+    <ul>
+      <li><a href="#about" tabindex="1">About</a></li>
+      <li><a href="#destinations" tabindex="2">Destinations</a></li>
+      <li><a href="#gallery" tabindex="3">Gallery</a></li>
+      <li><a href="#contact" tabindex="4">Contact</a></li>
+      <li><button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle Dark Mode">🌙</button></li>
     </ul>
-  </section>
+  </nav>
 
-  <section id="gallery">
-    <h2>Gallery</h2>
-    <div class="gallery" aria-label="Astro tourism destination images">
-      <a href="#img1"><img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=640&q=80" alt="Moon surface with Earth in background" tabindex="5" /></a>
-      <a href="#img2"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=640&q=80" alt="Mars landscape" tabindex="6" /></a>
-      <a href="#img3"><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=640&q=80" alt="Astronaut spacewalk" tabindex="7" /></a>
-      <a href="#img4"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=640&q=80" alt="Stars over mountains at night" tabindex="8" /></a>
-    </div>
+  <header>
+    <h1>Astro Tourism</h1>
+    <p id="subtitle">Explore the Cosmos. Travel Beyond Earth.</p>
+    <p id="currentDateTime" aria-live="polite"
+      style="font-style: italic; font-weight: 400; color: #9aefff; margin-top: 0.2rem;"></p>
+  </header>
 
-    <!-- Modal windows for large images -->
-    <!--  <div id="img1" class="modal" tabindex="-1" role="dialog" aria-modal="true">
+  <main class="container">
+
+    <section id="about">
+      <h2>What is Astro Tourism?</h2>
+      <p>Astro Tourism is the new frontier of travel, where adventurers journey beyond the confines of our planet to
+        witness the wonders of space and celestial phenomena in person. Imagine walking on the moon, orbiting Earth, or
+        seeing the breathtaking Milky Way with your own eyes.</p>
+    </section>
+
+    <section id="destinations">
+      <h2>Popular Astro Tourism Destinations</h2>
+      <p>From space hotels in low Earth orbit to guided stargazing trips in remote Earth locations, discover the best
+        destinations to satisfy your cosmic wanderlust.</p>
+      <ul
+        style="max-width: 700px; margin: 0 auto; list-style: none; padding: 0; font-weight: 300; color: #ccc; font-size: 1.1rem;">
+        <li>🌕 The Moon - Experience lunar landscapes and Earthrise views</li>
+        <li>🪐 Mars Explorations - Explore the red planet's mysterious terrain</li>
+        <li>🚀 Space Hotels - Stay in orbiting luxury with panoramic starscapes</li>
+        <li>🌌 Dark Sky Reserves - Earth-based getaways with perfect celestial views</li>
+      </ul>
+    </section>
+
+    <section id="gallery">
+      <h2>Gallery</h2>
+      <div class="gallery" aria-label="Astro tourism destination images">
+        <a href="#img1"><img
+            src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=640&q=80"
+            alt="Moon surface with Earth in background" tabindex="5" /></a>
+        <a href="#img2"><img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=640&q=80"
+            alt="Mars landscape" tabindex="6" /></a>
+        <a href="#img3"><img
+            src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=640&q=80"
+            alt="Astronaut spacewalk" tabindex="7" /></a>
+        <a href="#img4"><img
+            src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=640&q=80"
+            alt="Stars over mountains at night" tabindex="8" /></a>
+      </div>
+
+      <!-- Modal windows for large images -->
+      <!--  <div id="img1" class="modal" tabindex="-1" role="dialog" aria-modal="true">
       <a href="#gallery" aria-label="Close image view"></a>
       <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Moon surface with Earth in background large" />
     </div>
@@ -382,161 +461,164 @@
     </div>
   </section>-->
 
-  <section id="contact">
-    <h2>Stay Updated</h2>
-    <p>Subscribe to our newsletter for the latest astro tourism news and offers.</p>
-    <form id="subscribeForm" aria-label="Newsletter subscription form">
-      <input type="email" id="emailInput" name="email" placeholder="Your email address" aria-required="true" required />
-      <button type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
-      <p id="successMessage" class="success-message" role="alert" aria-live="polite" style="display:none;">Thank you for subscribing!</p>
-    </form>
-  </section>
+      <section id="contact">
+        <h2>Stay Updated</h2>
+        <p>Subscribe to our newsletter for the latest astro tourism news and offers.</p>
+        <form id="subscribeForm" aria-label="Newsletter subscription form">
+          <input type="email" id="emailInput" name="email" placeholder="Your email address" aria-required="true"
+            required />
+          <button type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
+          <p id="successMessage" class="success-message" role="alert" aria-live="polite" style="display:none;">Thank you
+            for subscribing!</p>
+        </form>
+      </section>
 
-</main>
+  </main>
 
-<!-- Back to top button -->
-<button id="backToTopBtn" aria-label="Back to top" title="Back to top">↑</button>
+  <!-- Back to top button -->
+  <button id="backToTopBtn" aria-label="Back to top" title="Back to top">↑</button>
 
-<script>
-  // Starfield animation setup
-  const canvas = document.getElementById('starfield');
-  const ctx = canvas.getContext('2d');
-  let width, height;
-  let stars = [];
+  <script>
+    // Starfield animation setup
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let stars = [];
 
-  function initStars() {
-    stars = [];
-    for (let i = 0; i < 150; i++) {
-      stars.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 1.2,
-        speed: Math.random() * 0.3 + 0.05,
-        opacity: Math.random() * 0.8 + 0.2,
-      });
-    }
-  }
-  function resizeCanvas() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-    initStars();
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  function animateStars() {
-    ctx.clearRect(0, 0, width, height);
-    stars.forEach(star => {
-      star.x -= star.speed;
-      if (star.x < 0) star.x = width;
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-      ctx.fillStyle = rgba(255, 255, 255, ${star.opacity});
-      ctx.shadowBlur = 6;
-      ctx.shadowColor = 'white';
-      ctx.fill();
-    });
-    requestAnimationFrame(animateStars);
-  }
-  animateStars();
-
-  // Smooth scroll for navigation links
-  const navLinks = document.querySelectorAll('nav a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href').slice(1);
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        window.scroll({
-          top: targetSection.offsetTop - 60,
-          behavior: 'smooth',
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 150; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 1.2,
+          speed: Math.random() * 0.3 + 0.05,
+          opacity: Math.random() * 0.8 + 0.2,
         });
       }
+    }
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      initStars();
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function animateStars() {
+      ctx.clearRect(0, 0, width, height);
+      stars.forEach(star => {
+        star.x -= star.speed;
+        if (star.x < 0) star.x = width;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(255, 255, 255, $, { staropacity });
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = 'white';
+        ctx.fill();
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    // Smooth scroll for navigation links
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').slice(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          window.scroll({
+            top: targetSection.offsetTop - 60,
+            behavior: 'smooth',
+          });
+        }
+      });
     });
-  });
 
-  // Form submission handling with simple validation
-  const form = document.getElementById('subscribeForm');
-  const emailInput = document.getElementById('emailInput');
-  const successMessage = document.getElementById('successMessage');
+    // Form submission handling with simple validation
+    const form = document.getElementById('subscribeForm');
+    const emailInput = document.getElementById('emailInput');
+    const successMessage = document.getElementById('successMessage');
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const emailValue = emailInput.value.trim();
-    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const emailValue = emailInput.value.trim();
+      const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-    if (emailPattern.test(emailValue)) {
-      successMessage.style.display = 'block';
-      emailInput.value = '';
-      setTimeout(() => {
-        successMessage.style.display = 'none';
-      }, 4000);
-    } else {
-      alert('Please enter a valid email address.');
-      emailInput.focus();
+      if (emailPattern.test(emailValue)) {
+        successMessage.style.display = 'block';
+        emailInput.value = '';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 4000);
+      } else {
+        alert('Please enter a valid email address.');
+        emailInput.focus();
+      }
+    });
+
+    // Back to top button logic
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 400) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scroll({ top: 0, behavior: 'smooth' });
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    // Load user preference from localStorage
+    if (localStorage.getItem('astroDarkMode') === 'true') {
+      body.classList.add('dark-mode');
     }
-  });
-
-  // Back to top button logic
-  const backToTopBtn = document.getElementById('backToTopBtn');
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 400) {
-      backToTopBtn.style.display = 'block';
-    } else {
-      backToTopBtn.style.display = 'none';
-    }
-  });
-  backToTopBtn.addEventListener('click', () => {
-    window.scroll({top: 0, behavior: 'smooth'});
-  });
-
-  // Dark mode toggle
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  const body = document.body;
-  // Load user preference from localStorage
-  if(localStorage.getItem('astroDarkMode') === 'true') {
-    body.classList.add('dark-mode');
-  }
-  darkModeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    if(body.classList.contains('dark-mode')) {
-      localStorage.setItem('astroDarkMode', 'true');
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('astroDarkMode', 'true');
+        darkModeToggle.textContent = '☀';
+        darkModeToggle.title = 'Toggle Light Mode';
+      } else {
+        localStorage.setItem('astroDarkMode', 'false');
+        darkModeToggle.textContent = '🌙';
+        darkModeToggle.title = 'Toggle Dark Mode';
+      }
+    });
+    // Set toggle icon on load based on mode
+    if (body.classList.contains('dark-mode')) {
       darkModeToggle.textContent = '☀';
       darkModeToggle.title = 'Toggle Light Mode';
     } else {
-      localStorage.setItem('astroDarkMode', 'false');
       darkModeToggle.textContent = '🌙';
       darkModeToggle.title = 'Toggle Dark Mode';
     }
-  });
-  // Set toggle icon on load based on mode
-  if(body.classList.contains('dark-mode')) {
-    darkModeToggle.textContent = '☀';
-    darkModeToggle.title = 'Toggle Light Mode';
-  } else {
-    darkModeToggle.textContent = '🌙';
-    darkModeToggle.title = 'Toggle Dark Mode';
-  }
 
-  // Animate subtitle fadeIn on page load
-  window.addEventListener('load', () => {
-    const subtitle = document.getElementById('subtitle');
-    subtitle.classList.add('visible');
-  });
+    // Animate subtitle fadeIn on page load
+    window.addEventListener('load', () => {
+      const subtitle = document.getElementById('subtitle');
+      subtitle.classList.add('visible');
+    });
 
-  // Display current date and time in header with update every minute
-  const currentDateTimeElem = document.getElementById('currentDateTime');
-  function updateDateTime() {
-    const now = new Date();
-    const options = {weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit'};
-    currentDateTimeElem.textContent = now.toLocaleDateString('en-US', options);
-  }
-  updateDateTime();
-  setInterval(updateDateTime, 60000);
-</script>
+    // Display current date and time in header with update every minute
+    const currentDateTimeElem = document.getElementById('currentDateTime');
+    function updateDateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      currentDateTimeElem.textContent = now.toLocaleDateString('en-US', options);
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
+  </script>
 
 </body>
+
 </html>
